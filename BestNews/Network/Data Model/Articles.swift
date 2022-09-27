@@ -27,4 +27,8 @@ struct Articles: Codable, Equatable {
             && lhs.publishedAt == rhs.publishedAt
             && lhs.content == rhs.content
     }
+    
+    lazy var showableDate: String = {
+        return Date().convertToUTC(dateToConvert: publishedAt ?? "")
+    }()
 }

@@ -18,10 +18,23 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <segue destination="uoI-hB-oms" kind="show" identifier="CompleteNews" id="HR1-JR-XxF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="128.57142857142856"/>
+        </scene>
+        <!--CompleteNews-->
+        <scene sceneID="NjP-x5-A2W">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CompleteNews" id="uoI-hB-oms" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="xGr-Td-Mb9"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CAz-4e-JX7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1550" y="-37"/>
         </scene>
     </scenes>
     <resources>

@@ -51,6 +51,20 @@ class HeadLinesViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.bind(newValue: item)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "CompleteNews", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "CompleteNews") {
+            let indexPath = headLinesView.indexPathForSelectedRow
+            let newsDetail = segue.destination as? CompleteNewsViewController
+            let selectedNews = headLinesViewModel.array.getValue()![indexPath!.row]
+            newsDetail!.article = selectedNews
+            headLinesView.deselectRow(at: indexPath!, animated: true)
+        }
+    }
 }
 
 extension HeadLinesViewController {
@@ -82,4 +96,3 @@ extension HeadLinesViewController {
         myrefreshControl.endRefreshing()
     }
 }
-

@@ -8,7 +8,6 @@
 import Foundation
 
 class HeadLinesViewModel {
-    
     private let headLinesClient = CurrentTopHeadlinesClient()
     
     var dataLoading: LiveData<Bool> = LiveData(false)

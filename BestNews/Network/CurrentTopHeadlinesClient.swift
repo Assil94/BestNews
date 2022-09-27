@@ -8,7 +8,6 @@
 import Foundation
 
 class CurrentTopHeadlinesClient {
-    
     private var task: URLSessionDataTask?
     private var weatherSession: URLSession
     private let apiKey = valueForAPIKey(named: "newsAPI")
