@@ -77,7 +77,7 @@ private extension HeadLinesViewController {
         getHeadlines()
         self.headLinesView.reloadData()
     }
-    // This method is used to observe "dataLoading" a boolean used the state of the call, if true we show the spinner from refresh control
+    // This method is used to observe "dataLoading" a boolean used to observe the state of the call, if true we show the spinner from refresh control
     // and if false, we refresh tableview data and hide the spinner
     private func setObserver() {
         headLinesViewModel.dataLoading.addObserver(observer: Observer { value in
