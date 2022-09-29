@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+// Generic UITableViewCell.
 class BaseUITableViewCell<T>: UITableViewCell {
     internal var value: T?
 

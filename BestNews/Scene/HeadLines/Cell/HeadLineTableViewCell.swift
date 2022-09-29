@@ -14,13 +14,10 @@ class HeadLineTableViewCell: BaseUITableViewCell<Articles> {
     static func nib() -> UINib {
         return UINib(nibName: "HeadLineTableViewCell", bundle: nil)
     }
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
+
+    //Bind data for cells
     override func bind(newValue: Articles?) {
         title.text = newValue?.title
-        headlineImg.loadFrom(URLAddress: newValue?.urlToImage ?? "")
+        headlineImg.loadFrom(URLAddress: newValue?.urlToImage ?? "", placeholder: UIImageView.imagePlaceholder)
     }
 }

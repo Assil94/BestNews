@@ -8,17 +8,19 @@
 import Foundation
 
 extension URLSession {
+    // Generic Call
     func request<T: Codable>(
         url: URL?,
         expecting: T.Type,
+        task: URLSessionDataTask?,
         completion: @escaping (Result<T, Error>) -> Void
     ) {
         guard let url = url else {
             completion(.failure(NetworkError.badUrl))
             return
         }
-        
-        let task = dataTask(with: url) { data, _, error in
+        var localTask = task
+        localTask = dataTask(with: url) { data, _, error in
             guard let data = data else {
                 if let error = error {
                     completion(.failure(error))
@@ -36,6 +38,6 @@ extension URLSession {
                 completion (.failure(error))
             }
         }
-        task.resume()
+        localTask?.resume()
     }
 }

@@ -11,12 +11,11 @@ import UIKit
 class CompleteNewsViewController: UIViewController {
     var article: Articles? = nil
     
-    
-    @IBOutlet weak var info: UILabel!
+    @IBOutlet weak var newsDescription: UILabel!
     @IBOutlet weak var publishedAtLabel: UILabel!
     @IBOutlet weak var author: UILabel!
     @IBOutlet weak var sourceName: UILabel!
-    @IBOutlet weak var contentOfNews: UITextView!
+    @IBOutlet weak var linkTextView: UITextView!
     @IBOutlet weak var newsImageView: UIImageView!
     
     override func viewDidLoad() {
@@ -29,8 +28,8 @@ extension CompleteNewsViewController {
         publishedAtLabel.text = "Publié le : \(article?.showableDate ?? "")"
         sourceName.text = article?.source?.name
         author.text = article?.author
-        contentOfNews.attributedText = article?.url?.htmlToAttributedString
-        newsImageView.loadFrom(URLAddress: article?.urlToImage ?? "")
-        info.text = article?.description
+        linkTextView.text = "Lien vers article complet : \(article?.url ?? "")"
+        newsImageView.loadFrom(URLAddress: article?.urlToImage ?? "", placeholder: UIImageView.imagePlaceholder)
+        newsDescription.text = article?.description ?? "Pas de description pour cet article"
     }
 }

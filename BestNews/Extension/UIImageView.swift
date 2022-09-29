@@ -10,12 +10,14 @@ import UIKit
 import Kingfisher
 
 extension UIImageView {
+    static let imagePlaceholder: UIImage? = UIImage(named: "placeholderimage")
+    
     func loadFrom(URLAddress: String, placeholder: UIImage? = nil) {
         guard let url = URL(string: URLAddress) else {
             return }
-            if accessibilityIdentifier != url.path {
-                accessibilityIdentifier = url.path
-                KF.url(url).placeholder(placeholder).set(to: self)
-            }
+        if accessibilityIdentifier != url.path {
+            accessibilityIdentifier = url.path
+            KF.url(url).placeholder(placeholder).set(to: self)
+        }
     }
 }

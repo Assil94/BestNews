@@ -8,22 +8,29 @@
 import Foundation
 
 class HeadLinesViewModel {
-    private let headLinesClient = CurrentTopHeadlinesClient()
+    private let headLinesClient: HeadLinesServicing
+    // Dependency Injection 
+    init(headLinesClient: HeadLinesServicing) {
+        self.headLinesClient = headLinesClient
+    }
     
     var dataLoading: LiveData<Bool> = LiveData(false)
-    var array: LiveData<[Articles]> = LiveData([])
+    var arrayOfArticles: LiveData<[Articles]> = LiveData([])
+    var errorHandler: (_ title: String, _ message: String) -> Void = { _, _ in }
     
     func getHeadlines(country: String) {
         if dataLoading.getValue() != true {
             dataLoading.setValue(value: true)
-            headLinesClient.getHeadlines(country: country) { result in
-                switch result {
-                case .success(let data):
-                    self.array.postValue(value: data.articles)
-                    self.dataLoading.postValue(value: false)
-                case .failure(let error):
-                    print(error)
-                    // TODO: Implement
+            DispatchQueue(label: "headlines data", qos: .background).async { [self] in
+                headLinesClient.getHeadlines(country: country) { result in
+                    switch result {
+                    case .success(let data):
+                        self.arrayOfArticles.postValue(value: data.articles)
+                        self.dataLoading.postValue(value: false)
+                    case .failure:
+                        self.dataLoading.postValue(value: false)
+                        self.errorHandler("Erreur", "Articles indisponible pour le moment")
+                    }
                 }
             }
         }

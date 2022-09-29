@@ -7,21 +7,27 @@
 
 import Foundation
 
-class CurrentTopHeadlinesClient {
+protocol HeadLinesServicing {
+    func getHeadlines(country: String, callback: @escaping (Result <HeadLinesData, Error>) -> Void)
+}
+
+class CurrentTopHeadlinesClient: HeadLinesServicing {
+    //DI
     private var task: URLSessionDataTask?
-    private var weatherSession: URLSession
+    private var headLinesSession: URLSession
     private let apiKey = valueForAPIKey(named: "newsAPI")
     
-    init(weatherSession: URLSession = URLSession(configuration: .default)) {
-        self.weatherSession = weatherSession
+    init(headLinesSession: URLSession = URLSession(configuration: .default)) {
+        self.headLinesSession = headLinesSession
     }
     
     func getHeadlines(country: String, callback: @escaping (Result <HeadLinesData, Error>) -> Void) {
         let path = "https://newsapi.org/v2/top-headlines?"
         let param = "country=\(country)&apiKey="
         guard let url = URL(string: "\(path)\(param)\(apiKey)") else { return }
-        print(url)
-        URLSession.shared.request(url: url, expecting: HeadLinesData.self) { result in
+        
+        
+        headLinesSession.request(url: url, expecting: HeadLinesData.self, task: task) { result in
             switch result {
             case .success(let data):
                 callback(.success(data))
