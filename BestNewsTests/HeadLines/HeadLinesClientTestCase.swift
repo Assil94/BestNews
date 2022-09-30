@@ -14,7 +14,6 @@ class HeadLinesClientTestCase: XCTestCase {
         let expect = expectation(description: "Wait for error to appear.")
         //When
         currentHeadLines.getHeadlines(country: "fr", callback: { result in
-            //then
             if case .failure(let error) = result {
                 XCTAssertNotNil(error)
                 expect.fulfill()
@@ -30,7 +29,6 @@ class HeadLinesClientTestCase: XCTestCase {
         let expect = expectation(description: "Wait for error to appear.")
         //When
         currentHeadLines.getHeadlines(country: "fr", callback: { result in
-            //then
             if case .failure(let error) = result {
                 XCTAssertNotNil(error)
                 expect.fulfill()
@@ -65,7 +63,6 @@ class HeadLinesClientTestCase: XCTestCase {
         var description = ""
         //When
         currentHeadLines.getHeadlines(country: "fr", callback: { result in
-            //Then
             if case .success(let data) = result {
                 totalResult = data.totalResults
                 status = data.status
@@ -77,6 +74,7 @@ class HeadLinesClientTestCase: XCTestCase {
                 expect.fulfill()
             }
         })
+        //Then :
         wait(for: [expect], timeout: 3)
     }
 }
